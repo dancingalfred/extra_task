@@ -20,6 +20,15 @@ def read_contacts():
     dbconn.close()
     return rows
 
+def read_short():
+    dbconn = db_connection()
+    cur = dbconn.cursor()
+    cur.execute("SELECT * FROM contacts;")
+    rows = cur.fetchall()
+    cur.close()
+    dbconn.close()
+    return rows
+
 
 def add_contact_to_contacts(first_name,last_name,title,organization):
     dbconn = db_connection()
@@ -56,5 +65,7 @@ while True: ## REPL - Read Execute Program Loop
     if cmd == "delete":
         del_id = input("Type the id of the contact you want to delete: ")
         delete_contact_from_contacts(del_id)
+    if cmd == "id":
+        print(read_short())
     if cmd == "quit":
         exit()
